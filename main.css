@@ -7,7 +7,7 @@ body {
     font-family: Tahoma, Arial;
 }
 
-nav {
+.nav {
     width: 100%;
     background-color: #4d5791;
     height: 44px;
@@ -40,7 +40,7 @@ div.menu ul li a:hover  {
 div.hero {
     height: 350px;
     background-color: #b4c6f0;
-    background-image: url('/pb/bg.png');
+    background-image: url('/bg.png');
     background-size: 400px;
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -73,13 +73,12 @@ div.hero h2 {
     display: inline-block;
 }
 
-footer {
+.footer {
     height: 50px;
     background-color: #b4c6f0;
     padding: 40px;
     text-align: center;
 }
-
 
 
 .container div.text-box {
