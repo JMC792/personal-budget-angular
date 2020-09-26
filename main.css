@@ -1,4 +1,4 @@
-* {
+*{
     box-sizing: border-box;
 }
 
@@ -37,6 +37,22 @@ div.menu ul li a:hover  {
     color: #4d5791;
 }
 
+div.hero {
+    height: 350px;
+    background-color: #b4c6f0;
+    background-image: url('bg.png');
+    background-size: 400px;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    padding-top: 40px;
+}
+
+div.hero h1,
+div.hero h2 {
+    text-align: center;
+    margin: 0;
+}
+
 div.hero h1 {
     color: #fff;
     font-size: 4.2em;
@@ -57,13 +73,15 @@ div.hero h2 {
     display: inline-block;
 }
 
-.footer {
+.bottom {
     height: 50px;
     background-color: #b4c6f0;
     padding: 40px;
-    text-align: center;
 }
 
+.center {
+    text-align: center;
+}
 
 .container div.text-box {
     display: inline-block;
