@@ -1,90 +1,56 @@
-<div class="center" id="main">
 
-    <pb-breadcrumb></pb-breadcrumb>
+<div class="container-fluid">
 
-    <div class="page-area">
+    <!--Homepage Title-->
+  <h1 class="display-1">My Dashboard</h1>
 
-        <pb-article>
+  <pb-post-create></pb-post-create>
+  <pb-post-list></pb-post-list>
 
-            <h1>Stay on track</h1>
-            
+  <div class="row" id="main">
+    
+
+    <!--Card 1-->
+    <div class="col-sm">
+      <div class="card">
+        <div class="card-body">
+          <article>
+            <h1>Total Budget Partition</h1>
             <p>
-                Do you know where you are spending your money? If you really stop to track it down,
-                you would get surprised! Proper budget management depends on real data... and this
-                app will help you with that!
+              <canvas id="myChart" width="300" height="300"></canvas>
             </p>
-
-        </pb-article>
-
-        <pb-article>
-            
-            <h1>Alerts</h1>
-            
-            <p>
-                What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
-            </p>
-
-        </pb-article>
-
-        <pb-article>
-            <h1>Results</h1>
-            
-            <p>
-                People who stick to a financial plan, budgeting every expense, get out of debt faster!
-                Also, they to live happier lives... since they expend without guilt or fear...
-                because they know it is all good and accounted for.
-            </p>
-
-        </pb-article>
-
-        <pb-article>
-            <h1>Free</h1>
-            
-            <p>
-                This app is free!!! And you are the only one holding your data!
-            </p>
-
-        </pb-article>
-
-        <pb-article>
-            <h1>Stay on track</h1>
-            
-            <p>
-            Do you know where you are spending your money? If you really stop to track it down,
-            you would get surprised! Proper budget management depends on real data... and this
-            app will help you with that!
-            </p>
-
-        </pb-article>
-
-        <pb-article>
-            <h1>Alerts</h1>
-            
-            <p>
-                What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
-            </p>
-
-        </pb-article>
-
-        <pb-article>
-            <h1>Results</h1>
-            
-            <p>
-                People who stick to a financial plan, budgeting every expense, get out of debt faster!
-                Also, they to live happier lives... since they expend without guilt or fear...
-                because they know it is all good and accounted for.
-            </p>
-       
-        </pb-article>
-
-        <article>
-            <h1>Free</h1>
-            
-            <p>
-                <canvas id="myChart" width="400" height="400"></canvas>
-            </p>
-        </article>
-
+          </article>
+        </div>
+      </div>
     </div>
+
+    <!--Card 2-->
+    <div class="col-sm">
+      <div class="card">
+        <div class="card-body">
+          <article>
+            <h1>Second Chart</h1>
+            <p>
+              <canvas id="myChart2" width="300" height="300"></canvas>
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!--Card 3-->
+    <div class="col-sm">
+      <div class="card">
+        <div class="card-body">
+          <article>
+            <h1>Third Radar Chart</h1>
+            <p>
+              <canvas id="myChart3" width="300" height="300"></canvas>
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>

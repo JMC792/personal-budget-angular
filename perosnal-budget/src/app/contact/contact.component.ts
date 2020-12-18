@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
+  enteredValue= '';
+  newPost= 'No Content';
+
+  onAddPost(postInput: HTMLTextAreaElement) {
+    this.newPost= this.enteredValue;
+  }
+
   constructor() { }
 
   ngOnInit(): void {
