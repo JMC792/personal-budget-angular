@@ -8,21 +8,26 @@ import {HttpClient } from '@angular/common/http';
 })
 export class PostCreateComponent implements OnInit {
 
+
+  constructor(private http : HttpClient) { }
+ 
+  enteredId= '';
   enteredName = '';
   enteredColor = '';
-  enteredAmountValue= '';
+  enteredBudget= '';
 
-  constructor(private http:HttpClient) { }
 
-  //--------------------
-  // addbudget post request
-  //----------------------
   addBudget(){
-    let url = "http://localhost:300/addbudget";
-
-    this.http.post(url, {
-
-    } )
+    let url = "Http://localhost:3000/addbudget"
+    this.http.post<any>(url, {
+      id: this.enteredId,
+      name: this.enteredName,
+      budget: this.enteredBudget,
+      color: this.enteredColor
+    }).toPromise().then( (data:any) => {
+      console.log(data)
+      console.log(JSON.stringify(data.json))
+    })
   }
 
   //---------------------

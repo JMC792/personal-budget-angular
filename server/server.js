@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const userRoutes = require("./Routes/user");
 var cors = require("cors");
 const postSchema = require("./Models/post");
+const userSchema = require("./Models/user");
 
 //-------------------
 //middleware instance
@@ -29,20 +30,70 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
       console.log('connection failed')
   });
 
+  //---------------------------
+  //sign up user
+  //----------------------
+  app.post('/signup', (req,res, next) => {
+    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+      var addedUser = {
+        email : req.body.email,
+        password: req.body.password
+      };
+      console.log("connected to the database")
+      console.log(addedUser)
+      userSchema.insertMany(addedUser)
+      .then((data) => {
+        res.json(data);
+      })
+    })
+    .catch((connectionError) => {
+      console.log(connectionError)
+    })
+  });
+
+  //---------------------------
+  //verify user login
+  //---------------------------
+  app.post('/api/login', (req, res) => {
+    const { username, password } = req.body;
+    
+    for(let user of users){
+        if(username == user.username && password == user.password){
+            let token = jwt.sign({ id: user.id, username: user.username}, secretKey, { expiresIn: '7d'});
+            res.json({
+                success: true,
+                err: null,
+                token
+            });
+            break;
+        }
+        else{
+            res.status(401).json({
+                success: false,
+                token: null,
+                err: 'Username or password is incorrect'
+            });
+        }
+    }
+});
 
 //---------------------------------
 //gets budget from mongoose
 //---------------------------------
 app.get("/budget", (req, res, next ) => {
+  mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
     postSchema.find({}).then((data) => {
       console.log("getting info from database")
         res.json(data);
         mongoose.connection.close();
       })
-      .catch((connectionError) => {
-        console.log(connectionError);
-      });
   })
+  .catch((connectionError) => {
+    console.log(connectionError);
+  });
+})
 
 //---------------------------------
 //adds data to the database

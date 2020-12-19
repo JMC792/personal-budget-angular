@@ -26,10 +26,10 @@ export class HomepageComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.http.get('http://localhost:3000/budget').subscribe((res: any) => {
       console.log(res);
-      for (var i = 0; i < res.data.length; i++) {
-        this.dataSource.datasets[0].data[i] = res.data[i].budget;
-        this.dataSource.labels[i] = res.data[i].name;
-        this.dataSource.datasets[0].backgroundColor[i] = res.data[i].color;
+      for (var i = 0; i < res.length; i++) {
+        this.dataSource.datasets[0].data[i] = res[i].budget;
+        this.dataSource.labels[i] = res[i].name;
+        this.dataSource.datasets[0].backgroundColor[i] = res[i].color;
       }
       this.createPieChart();
       this.createLineChart();

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms"
+import { HttpClient } from "@angular/common/http" 
 
 @Component({
   selector: 'pb-signup',
@@ -8,7 +9,23 @@ import {NgForm} from "@angular/forms"
 })
 export class SignupComponent {
 
-  constructor() {}
+  addedEmail = '';
+  addedPassword = ''
+
+  constructor(private http : HttpClient ) {}
+
+  addUser(){
+    let url = "Http://localhost:3000/signup"
+
+    this.http.post<any>(url, {
+      email: this.addedEmail,
+      password: this.addedPassword      
+    }).toPromise().then((data:any) => {
+      console.log(data)
+      console.log(JSON.stringify(data.json))
+    })
+
+  }
 
 
 }

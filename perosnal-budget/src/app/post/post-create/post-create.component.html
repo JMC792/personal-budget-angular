@@ -3,7 +3,21 @@
   <!--Textarea asks user input -->
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">Title</span>
+      <span class="input-group-text" id="basic-addon1">ID</span>
+    </div>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="1-99"
+      aria-describedby="basic-addon1"
+      [(ngModel)]= "enteredId"
+    />
+  </div>
+
+  <!--Textarea asks user input -->
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">Name</span>
     </div>
     <input
       type="text"
@@ -14,32 +28,32 @@
     />
   </div>
 
+    <!--Aks user number-->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon2">Budget</span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="125"
+        aria-describedby="basic-addon2"
+        [(ngModel)]= "enteredBudget"
+      />
+    </div>
+
   <!--Textarea asks user input -->
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <span class="input-group-text" id="basic-addon1">Title</span>
+      <span class="input-group-text" id="basic-addon1">Color</span>
     </div>
     <input
       type="text"
       class="form-control"
-      placeholder="Rent"
+      placeholder="#947264"
       aria-describedby="basic-addon1"
       [(ngModel)]= "enteredColor"
     />
-  </div>
-
-  <!--Aks user number-->
-  <div class="input-group mb-3">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="125"
-      aria-describedby="basic-addon2"
-      [(ngModel)]= "enteredAmountValue"
-    />
-    <div class="input-group-append">
-      <span class="input-group-text" id="basic-addon2">Amount</span>
-    </div>
   </div>
 
   <!--button with click event that listens to input -->
