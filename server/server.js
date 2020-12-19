@@ -7,6 +7,10 @@ const userRoutes = require("./Routes/user");
 var cors = require("cors");
 const postSchema = require("./Models/post");
 const userSchema = require("./Models/user");
+const jwt = require("jsonwebtoken");
+const { compare } = require("bcrypt");
+const user = require("./Models/user");
+const checkAuth = require("./middleware/check-auth")
 
 //-------------------
 //middleware instance
@@ -17,7 +21,7 @@ app.use("/api/user", userRoutes);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let url = "mongodb://localhost:27017/personal_budget";
+let url = "mongodb+srv://jmc792:Papichojr1!@4166-cluster.gii5w.mongodb.net/personal_budget?retryWrites=true&w=majority"
 
 //------------------
 // Connects to mongo
@@ -56,32 +60,42 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   //verify user login
   //---------------------------
   app.post('/api/login', (req, res) => {
-    const { username, password } = req.body;
-    
-    for(let user of users){
-        if(username == user.username && password == user.password){
-            let token = jwt.sign({ id: user.id, username: user.username}, secretKey, { expiresIn: '7d'});
-            res.json({
-                success: true,
-                err: null,
-                token
-            });
-            break;
+    let fetchedUser;
+    mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then (() => {
+      userSchema.findOne({email: req.body.email})
+      .then(user => {
+        if (!user) {
+          return res.status(401).json({
+            message: " Auth Failed"
+          })
         }
-        else{
-            res.status(401).json({
-                success: false,
-                token: null,
-                err: 'Username or password is incorrect'
-            });
+        fetchedUser- user ;
+        return compare(req.body.password, userSchema.password)
+      })
+      .then(result => {
+        if (!result){
+          return res.status(401).json({
+            message: "Auth Failed"
+          })
         }
-    }
+        const token = jwt.sign(
+          {email: fetchedUser.email, userId: fetchedUser_id}, 
+          'my-secret-key',
+          {expiresIn: "1h"})
+      })
+      res.status(200).json({
+        token: token
+      })
+    }).catch((connectionError)=> {
+      console.log(connectionError)
+    })
 });
 
 //---------------------------------
 //gets budget from mongoose
 //---------------------------------
-app.get("/budget", (req, res, next ) => {
+app.get("/budget", checkAuth, (req, res, next ) => {
   mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     postSchema.find({}).then((data) => {
@@ -98,7 +112,7 @@ app.get("/budget", (req, res, next ) => {
 //---------------------------------
 //adds data to the database
 //--------------------------------
-app.post("/addBudget", (req, res) => {
+app.post("/addBudget", checkAuth, (req, res) => {
   console.log(req.body);
   mongoose
     .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })

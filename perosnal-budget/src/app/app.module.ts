@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { FormsModule } from '@angular/forms';
 import { PostCreateComponent } from './post/post-create/post-create.component';
 import { PostListComponent } from './post/post-list/post-list.component';
+import { AuthInterceptor } from './auth/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { PostListComponent } from './post/post-list/post-list.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
